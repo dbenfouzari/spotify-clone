@@ -3,11 +3,22 @@
 import { useCallback } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { TbPlaylist } from "react-icons/tb";
+import { useAuthModal } from "@/hooks/use-auth-modal";
+import { useUploadModal } from "@/hooks/use-upload-modal";
+import useUser from "@/hooks/use-user";
 
 export default function Library() {
+  const authModal = useAuthModal();
+  const uploadModal = useUploadModal();
+  const { user } = useUser();
+
   const handleClick = useCallback(() => {
-    // handle upload later
-  }, []);
+    if (!user) return authModal.onOpen();
+
+    // TODO: Check for subscription
+
+    return uploadModal.onOpen();
+  }, [authModal, uploadModal, user]);
 
   return (
     <div className="flex flex-col">
