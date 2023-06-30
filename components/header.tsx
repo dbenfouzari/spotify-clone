@@ -11,6 +11,7 @@ import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { twMerge } from "tailwind-merge";
 import Button from "./button";
 import { useAuthModal } from "@/hooks/use-auth-modal";
+import { useHeaderColor } from "@/hooks/use-header-color";
 import { usePlayer } from "@/hooks/use-player";
 import useUser from "@/hooks/use-user";
 
@@ -27,6 +28,7 @@ export default function Header({
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
   const player = usePlayer();
+  const { color } = useHeaderColor();
 
   const handleLogout = useCallback(async () => {
     const { error } = await supabaseClient.auth.signOut();
@@ -43,9 +45,14 @@ export default function Header({
   return (
     <div
       className={twMerge(
-        "h-fit bg-gradient-to-b from-emerald-800 p-6",
+        "h-fit bg-gradient-to-b from-emerald-800 p-6 transition",
         className
       )}
+      style={
+        {
+          "--tw-gradient-from": `${color} var(--tw-gradient-from-position)`,
+        } as any
+      }
     >
       <div className="w-full mb-4 flex items-center justify-between">
         <div className="hidden md:flex gap-x-2 items-center">

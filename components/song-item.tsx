@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { PlayButton } from "@/components/play-button";
+import { useHeaderColor } from "@/hooks/use-header-color";
 import { useLoadImage } from "@/hooks/use-load-image";
 import { Song } from "@/types";
 
@@ -12,6 +13,7 @@ export interface SongItemProps {
 
 export function SongItem({ data, onClick }: SongItemProps) {
   const imagePath = useLoadImage(data);
+  const { onImageHover, onImageBlur } = useHeaderColor();
 
   return (
     <div
@@ -48,6 +50,8 @@ export function SongItem({ data, onClick }: SongItemProps) {
           src={imagePath || "/images/liked.png"}
           fill
           alt="Image"
+          onMouseEnter={onImageHover}
+          onMouseLeave={onImageBlur}
         />
       </div>
 
