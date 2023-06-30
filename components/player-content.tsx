@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
+// eslint-disable-next-line import/no-named-as-default
 import useSound from "use-sound";
 import { LikeButton } from "@/components/like-button";
 import { MediaItem } from "@/components/media-item";

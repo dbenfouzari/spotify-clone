@@ -65,7 +65,7 @@ export function LikeButton({ songId }: LikeButtonProps) {
     }
 
     router.refresh();
-  }, [authModal, isLiked, songId, supabaseClient, user]);
+  }, [authModal, isLiked, router, songId, supabaseClient, user]);
 
   const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
 

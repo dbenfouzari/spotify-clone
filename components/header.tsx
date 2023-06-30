@@ -38,7 +38,7 @@ export default function Header({
     } else {
       toast.success("Logged out!");
     }
-  }, [router, supabaseClient.auth]);
+  }, [player, router, supabaseClient.auth]);
 
   return (
     <div
