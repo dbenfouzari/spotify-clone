@@ -11,6 +11,7 @@ import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { twMerge } from "tailwind-merge";
 import Button from "./button";
 import { useAuthModal } from "@/hooks/use-auth-modal";
+import { usePlayer } from "@/hooks/use-player";
 import useUser from "@/hooks/use-user";
 
 export interface HeaderProps {
@@ -25,11 +26,11 @@ export default function Header({
   const authModal = useAuthModal();
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
+  const player = usePlayer();
 
   const handleLogout = useCallback(async () => {
     const { error } = await supabaseClient.auth.signOut();
-    // TODO: Reset any played songs
-
+    player.reset();
     router.refresh();
 
     if (error) {

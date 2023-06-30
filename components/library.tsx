@@ -6,6 +6,7 @@ import { TbPlaylist } from "react-icons/tb";
 import { MediaItem } from "@/components/media-item";
 import { useAuthModal } from "@/hooks/use-auth-modal";
 import { useOnPlay } from "@/hooks/use-on-play";
+import { useSubscribeModal } from "@/hooks/use-subscribe-modal";
 import { useUploadModal } from "@/hooks/use-upload-modal";
 import useUser from "@/hooks/use-user";
 import { Song } from "@/types";
@@ -15,15 +16,18 @@ export interface LibraryProps {
 }
 
 export default function Library({ songs }: LibraryProps) {
+  const subscribeModal = useSubscribeModal();
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
-  const { user } = useUser();
+  const { user, subscription } = useUser();
   const onPlay = useOnPlay(songs);
 
   const handleClick = useCallback(() => {
     if (!user) return authModal.onOpen();
 
-    // TODO: Check for subscription
+    if (!subscription) {
+      return subscribeModal.onOpen();
+    }
 
     return uploadModal.onOpen();
   }, [authModal, uploadModal, user]);
