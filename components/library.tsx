@@ -30,7 +30,7 @@ export default function Library({ songs }: LibraryProps) {
     }
 
     return uploadModal.onOpen();
-  }, [authModal, uploadModal, user]);
+  }, [authModal, subscribeModal, subscription, uploadModal, user]);
 
   return (
     <div className="flex flex-col">
